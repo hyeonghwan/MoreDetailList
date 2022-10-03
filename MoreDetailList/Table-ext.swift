@@ -6,3 +6,19 @@
 //
 
 import Foundation
+import UIKit
+
+
+protocol Identifiable{
+    static var identify: String {get}
+}
+extension Identifiable{
+    static var identify: String {
+        return String(describing: Self.self)
+    }
+}
+
+extension TableViewCell: Identifiable{
+    
+}
+

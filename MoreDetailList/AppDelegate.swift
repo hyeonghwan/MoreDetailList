@@ -26,11 +26,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    
     }
 
 
 }
+extension UIApplication {
+    static var firstKeyWindowForConnectedScenes: UIWindow? {
+        UIApplication.shared
+            // Of all connected scenes...
+            .connectedScenes.lazy
+
+            // ... grab all foreground active window scenes ...
+            .compactMap { $0.activationState == .foregroundActive ? ($0 as? UIWindowScene) : nil }
+
+            // ... finding the first one which has a key window ...
+            .first(where: { $0.keyWindow != nil })?
+
+            // ... and return that window.
+            .keyWindow
+    }
+}
+
 
