@@ -17,7 +17,7 @@ protocol Next{
 }
 
 protocol OpenWebDelegate{
-    func openWeb(_ url: URL)
+    func openWeb(_ url: URL,_ title: String)
 }
 
 enum AccessType {
@@ -29,7 +29,7 @@ enum AccessType {
 class NextViewController: UIViewController{
     
     var navigationTitle: String
-    let webView = WKWebView()
+    
     
     private lazy var label: UILabel = {
         let label = UILabel()
@@ -80,30 +80,32 @@ class NextViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.title = navigationTitle
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("nextViewController viewWilldissaper")
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func getWebViewController(_ webView: WKWebView,_ url: URL) -> UIViewController? {
-        return WebViewContainer(webView: webView, url: url)
+    func getWebViewController(_ url: URL,_ title: String) -> UIViewController? {
+        return WebViewContainer(url: url,title: title)
     }
     
 }
 
 extension NextViewController: OpenWebDelegate {
    
-    func openWeb(_ url: URL) {
+    func openWeb(_ url: URL,_ title: String) {
         
-        if let webViewController = getWebViewController(webView,url){
+        if let webViewController = getWebViewController(url,title){
             guard let wv = webViewController as? WebViewContainer else {return}
             
             DispatchQueue.main.async {
                 wv.view.setNeedsLayout()
             }
-            
+            self.navigationItem.title = ""
             self.show(wv, sender: nil)
         }
     }
@@ -114,7 +116,6 @@ private extension NextViewController{
     
     func navigationConfigure() {
         self.view.backgroundColor = .tertiarySystemBackground
-        self.navigationItem.title = navigationTitle
         self.navigationController?.navigationBar.tintColor = .black
     }
     

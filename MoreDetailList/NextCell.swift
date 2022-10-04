@@ -79,8 +79,9 @@ class NextCell: UITableViewCell{
             print("default error occur")
             break
         }
-        if let url = url {
-            self.webDelegate?.openWeb(url)
+        if let url = url,
+           let title = self.label.text{
+            self.webDelegate?.openWeb(url,title)
         }
         
     }

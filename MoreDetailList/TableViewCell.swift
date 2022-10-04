@@ -86,10 +86,12 @@ class TableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview()
         }
+        
         button.snp.makeConstraints{
+            
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-20)
-            $0.width.height.equalTo(20)
+            $0.width.height.equalTo(40)
         }
         
     }

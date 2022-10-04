@@ -25,15 +25,16 @@ class ShadowView: UIView {
         let shadowLayer = CALayer()
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOffset = CGSize.zero
-        shadowLayer.shadowRadius = 8
-        shadowLayer.shadowOpacity = 0.6
+        shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
+        shadowLayer.shadowRadius = 3
+        shadowLayer.shadowOpacity = 0.5
         shadowLayer.backgroundColor = UIColor.clear.cgColor
         return shadowLayer
     }
     
     private func setupShadow(){
         let line = CAShapeLayer()
-        let path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 8)
+        let path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 12)
         line.path = path.cgPath
         line.strokeColor = UIColor.lightGray.cgColor
         line.fillColor = UIColor.clear.cgColor

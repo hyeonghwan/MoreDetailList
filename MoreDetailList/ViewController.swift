@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         table.dataSource = self
         table.separatorStyle = .none
         table.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
-        table.alwaysBounceVertical = false
+        table.scrollsToTop = false
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 1000;
         return table
@@ -54,6 +54,7 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationItem.titleView?.tintColor = .label
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         
         view.directionalLayoutMargins = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         
